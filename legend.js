@@ -56,11 +56,12 @@
     console.log('add layer: ', layer);
     var el = document.getElementById( 'legend-component-content' );
     
-    var item = this._createElement('div', el, layer.id, layer.name, 'legend-item');
+    var item = this._createElement('div', el, layer.id, '', 'legend-item');
+    this._createElement('div', item, 'title-'+layer.id, layer.name, 'legend-title');
 
     //if can remove layer, add option to UI
     if ( this.state.editable ) {
-      this._createElement('div', item, 'close-'+layer.id, '&#x2716;', 'legend-remove-layer');
+      this._createElement('div', item, 'close-'+layer.id, '&#x2715;', 'legend-remove-layer');
     }
 
     if ( !blockEventing ) {
