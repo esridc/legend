@@ -1,0 +1,54 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8"/> 
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Legend Test Page</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <link rel="stylesheet" href="legend.css" />
+    <style>
+      body {
+        margin:0px;
+        padding:0px;
+      }
+      #legend-container {
+        width:340px;
+        height:400px;
+        margin:50px;
+        overflow: hidden;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="legend-container"></div>
+
+    <script src="legend.js"></script>
+
+    <script>
+      var legend = new Legend('legend-container', {
+        editable: true,
+        layers: [
+          {
+            'id': '123',
+            'name': 'First Layer',
+            'renderer': {}
+          },
+          {
+            'id': '456',
+            'name': 'Second Layer',
+            'renderer': {}
+          },
+          {
+            'id': '789',
+            'name': 'Third Layer',
+            'renderer': {}
+          }
+        ]
+      });
+    </script>
+  </body>
+</html>
