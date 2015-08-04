@@ -60,15 +60,41 @@
     this._createElement('div', item, 'title-'+layer.id, layer.name, 'legend-title');
 
     //if can remove layer, add option to UI
-    if ( this.state.editable ) {
-      this._createElement('div', item, 'close-'+layer.id, '&#x2715;', 'legend-remove-layer');
-    }
+    var editable = ( this.state.editable ) ? 'enabled' : 'disabled';
+    this._createElement('div', item, 'close-'+layer.id, '&#x2715;', 'legend-remove-layer '+editable);
 
     if ( !blockEventing ) {
       this._classRemoveEventListeners('click', 'legend-remove-layer', '_onRemoveLayer' );
       this._classEventBuilder('click', 'legend-remove-layer', '_onRemoveLayer' );
     }
   }
+
+
+
+  Legend.prototype.disableRemove = function() {
+    this.state.editable = false;
+    var editable = ( this.state.editable ) ? 'enabled' : 'disabled';
+    var items = document.getElementsByClassName( 'legend-remove-layer' );
+    
+    for(var i=0;i<items.length;i++){
+      items[i].classList.remove('enabled');
+      items[i].classList.add('disabled');
+    }
+
+  }
+
+
+  Legend.prototype.enableRemove = function() {
+    this.state.editable = true;
+    var editable = ( this.state.editable ) ? 'enabled' : 'disabled';
+    var items = document.getElementsByClassName( 'legend-remove-layer' );
+    
+    for(var i=0;i<items.length;i++){
+      items[i].classList.remove('disabled');
+      items[i].classList.add('enabled');
+    }
+  }
+
 
 
   /*

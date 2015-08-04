@@ -60,6 +60,14 @@
   border: 1px solid #EEE;
 }
 
+.legend-remove-layer.disabled {
+  display: none;
+}
+
+.legend-remove-layer.enabled {
+  display: block;
+}
+
 .legend-remove-layer:hover {
   cursor: pointer;
   color:#000;
