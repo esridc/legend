@@ -57,19 +57,33 @@
   Legend.prototype.addLayer = function(layer, blockEventing) {
     console.log('add layer: ', layer);
     var el = document.getElementById( 'legend-component-content' );
+    
     //if can remove layer, add option to UI
     var editable = ( this.state.editable ) ? 'block' : 'none';
     var title = this._formatTitle(layer.name);
 
     var item = this._createElement('div', el, layer.id, '', 'legend-item');
-    this._createElement('div', item, 'title-'+layer.id, title, 'legend-title');
-    
-    var editor = this._createElement('div', item, 'edit-tools-'+layer.id, '', 'legend-edit-tools');
+    var top = this._createElement('div', item, 'top-'+layer.id, '', 'legend-top-row');
+
+    //title
+    this._createElement('div', top, 'title-'+layer.id, title, 'legend-title');
+  
+    //add editor     
+    var editor = this._createElement('div', top, 'edit-tools-'+layer.id, '', 'legend-edit-tools');
     editor.style.display = editable;
 
     //create editor elements 
     this._createElement('div', editor, 'close-'+layer.id, '&#x2715;', 'legend-tool legend-remove-layer');
     this._createElement('div', editor, 'edit-'+layer.id, '&#x270E;', 'legend-tool legend-edit-layer');
+
+    //add color ramps IF choropleth 
+    if ( layer.renderer.visualVariables ) {
+      console.log('renderer', layer.renderer);
+      var renderer = layer.renderer.visualVariables[0];
+      var keyContainer = this._createElement('div', item, 'key-container-'+layer.id, '', 'key-container');
+      var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+renderer.field, 'legend-field');
+      this._buildColorRamp(keyContainer, renderer.stops, layer.id);
+    }
 
     if ( !blockEventing ) {
       console.log('add me!');
@@ -110,6 +124,38 @@
 
     return title;
   }
+
+
+  Legend.prototype._dojoColorToRgba = function(c) {
+    var color = 'rgba('+c[0]+','+c[1]+','+c[2]+','+c[3]+')';
+    return color;
+  }
+
+
+  Legend.prototype._buildColorRamp = function(el, stops, id) {
+    console.log('stops', stops);
+    var self = this;
+    var width = 280 / stops.length; 
+
+    stops.forEach(function(stop) {
+      var color = self._dojoColorToRgba(stop.color);
+      var item = document.createElement('div'); 
+      el.appendChild( item ).className = 'legend-color-swatch';
+      
+      item.style.background = color;
+      item.style.width = width + 'px';
+    });
+
+    var min = stops[0].value.toFixed(2);
+    var max = stops[stops.length - 1].value.toFixed(2);
+    min = parseFloat(min).toLocaleString();
+    max = parseFloat(max).toLocaleString();
+
+    var values = this._createElement('div', el, 'values-'+id, '', 'legend-key');
+    this._createElement('div', values, 'min-'+id, min, 'legend-min-value');
+    this._createElement('div', values, 'max-'+id, max, 'legend-max-value');
+  }
+
 
 
 

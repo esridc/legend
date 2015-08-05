@@ -29,23 +29,25 @@
     <script src="legend.js"></script>
 
     <script>
+      var rend1 = '{"visualVariables":[{"type":"colorInfo","field":"AREA","stops":[{"value":33.3183239407,"color":[255,255,204,200],"label":null},{"value":625.8122922581125,"color":[255,237,160,200],"label":null},{"value":1218.306260575525,"color":[254,217,118,200],"label":null},{"value":1810.8002288929374,"color":[254,178,76,200],"label":null},{"value":2403.29419721035,"color":[253,141,60,200],"label":null},{"value":2995.7881655277624,"color":[252,78,42,200],"label":null},{"value":3588.282133845175,"color":[227,26,28,200],"label":null},{"value":4180.776102162587,"color":[177,0,38,200],"label":null}]}],"type":"simple","label":"","description":"","symbol":{"color":[43,140,190,200],"outline":{"color":[255,255,255,255],"width":0.5,"type":"esriSLS","style":"esriSLSSolid"},"type":"esriSFS","style":"esriSFSSolid"}}';
+
+      var rend2 = '{"visualVariables":[{"type":"colorInfo","field":"DIST","stops":[{"value":1,"color":[255,255,217,200],"label":null},{"value":4.5,"color":[237,248,177,200],"label":null},{"value":8,"color":[199,233,180,200],"label":null},{"value":11.5,"color":[127,205,187,200],"label":null},{"value":15,"color":[65,182,196,200],"label":null},{"value":18.5,"color":[29,145,192,200],"label":null},{"value":22,"color":[34,94,168,200],"label":null},{"value":25.5,"color":[12,44,132,200],"label":null}]}],"type":"simple","label":"","description":"","symbol":{"color":[43,140,190,200],"outline":{"color":[255,255,255,255],"width":0.5,"type":"esriSLS","style":"esriSLSSolid"},"type":"esriSFS","style":"esriSFSSolid"}}'
+
+      rend1 = JSON.parse(rend1);
+      rend2 = JSON.parse(rend2);
+
       var legend = new Legend('legend-container', {
         editable: true,
         layers: [
           {
             'id': '123',
             'name': 'The first layer has a very long title ok?! No, I mean long...',
-            'renderer': {}
+            'renderer': rend1
           },
           {
             'id': '456',
             'name': 'this_has_a_bad_Title_format',
-            'renderer': {}
-          },
-          {
-            'id': '789',
-            'name': 'Third Layer',
-            'renderer': {}
+            'renderer': rend2
           }
         ]
       });

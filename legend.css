@@ -29,7 +29,7 @@
   border-bottom: 1px solid #E8E8E8;
   padding: 5px;
   position: relative;
-  width: 100%;
+  width: 290px;
   margin: auto;
   padding-top:10px;
   padding:bottom:10px;
@@ -51,6 +51,10 @@
 
 [class~='legend-item']:last-of-type  {
   border-bottom: none;
+}
+
+.legend-top-row {
+  overflow: hidden;
 }
 
 .legend-title {
@@ -96,6 +100,39 @@
 .legend-edit-layer:hover {
   cursor: pointer;
   color:#000;
+}
+
+.key-container {
+  width:100%;
+  height:auto;
+  overflow: hidden;
+}
+
+.legend-color-swatch {
+  float: left;
+  height:10px;
+  margin-right: 1px;
+}
+
+.legend-min-value {
+  width:40%;
+  float:left;
+  text-align: left;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.legend-max-value {
+  width:40%;
+  float:right;
+  text-align: right;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.legend-field {
+  font-size: 11px;
+  margin-top: 3px; 
 }
 
 /* Don't show shadows when selecting text */
