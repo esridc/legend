@@ -77,8 +77,8 @@
     this._createElement('div', editor, 'edit-'+layer.id, '&#x270E;', 'legend-tool legend-edit-layer');
 
     //add color ramps IF choropleth 
+    console.log('renderer.visualVariables???', layer.renderer.visualVariables);
     if ( layer.renderer.visualVariables ) {
-      console.log('renderer', layer.renderer);
       var renderer = layer.renderer.visualVariables[0];
       var keyContainer = this._createElement('div', item, 'key-container-'+layer.id, '', 'key-container');
       var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+renderer.field, 'legend-field');
@@ -86,7 +86,6 @@
     }
 
     if ( !blockEventing ) {
-      console.log('add me!');
       this.layers.push(layer);
       this._classRemoveEventListeners('click', 'legend-remove-layer', '_onRemoveLayer' );
       this._classEventBuilder('click', 'legend-remove-layer', '_onRemoveLayer' );
@@ -210,7 +209,6 @@
     var linkEl = document.getElementsByClassName( className );
     for(var i=0;i<linkEl.length;i++){
       if(linkEl[i].removeEventListener){
-        console.log('remove me!');
         linkEl[i].removeEventListener( eventName , function(e) { self[ fnName ].call(self, e) });
       }
     }
