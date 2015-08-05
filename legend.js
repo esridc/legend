@@ -57,13 +57,41 @@
   Legend.prototype.addLayer = function(layer, blockEventing) {
     console.log('add layer: ', layer);
     var el = document.getElementById( 'legend-component-content' );
-    
+    var item = this._createElement('div', el, layer.id, '', 'legend-item');
+
+    this.populateLayerItem(item, layer, blockEventing);
+  }
+
+
+
+  Legend.prototype.updateLayer = function(layer) {
+    console.log('LEGEND: update layer', layer);
+    var self = this;
+    var exists = false;
+
+    //make sure we already have the layer 
+    this.layers.forEach(function(layer, i) {
+      if ( layer.id === id ) { exists = true; }
+    });
+
+    if ( !exists ) { 
+      this.addLayer(layer); 
+    } else {
+      console.log('update the layer!');
+      var el = document.getElementById( id );
+      el.html = '';
+      this.populateLayerItem( el, layer );
+    }
+  }
+
+
+
+  Legend.prototype.populateLayerItem = function(el, layer, blockEventing) {
     //if can remove layer, add option to UI
     var editable = ( this.state.editable ) ? 'block' : 'none';
+    
     var title = this._formatTitle(layer.name);
-
-    var item = this._createElement('div', el, layer.id, '', 'legend-item');
-    var top = this._createElement('div', item, 'top-'+layer.id, '', 'legend-top-row');
+    var top = this._createElement('div', el, 'top-'+layer.id, '', 'legend-top-row');
 
     //title
     this._createElement('div', top, 'title-'+layer.id, title, 'legend-title');
@@ -80,7 +108,7 @@
     console.log('renderer.visualVariables???', layer.renderer.visualVariables);
     if ( layer.renderer.visualVariables ) {
       var renderer = layer.renderer.visualVariables[0];
-      var keyContainer = this._createElement('div', item, 'key-container-'+layer.id, '', 'key-container');
+      var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
       var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+renderer.field, 'legend-field');
       this._buildColorRamp(keyContainer, renderer.stops, layer.id);
     }
@@ -92,6 +120,7 @@
       this._classRemoveEventListeners('click', 'legend-edit-layer', '_onLayerEdit' );
       this._classEventBuilder('click', 'legend-edit-layer', '_onLayerEdit' );
     }
+
   }
 
 
