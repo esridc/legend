@@ -78,7 +78,7 @@
       this.addLayer(layer); 
     } else {
       console.log('update the layer!');
-      var el = document.getElementById( id );
+      var el = document.getElementById( layer.id );
       el.html = '';
       this.populateLayerItem( el, layer );
     }
