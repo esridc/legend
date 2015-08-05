@@ -65,7 +65,6 @@
 
 
   Legend.prototype.updateLayer = function(layer) {
-    console.log('LEGEND: update layer', layer);
     var self = this;
     var exists = false;
 
@@ -77,10 +76,10 @@
     if ( !exists ) { 
       this.addLayer(layer); 
     } else {
-      console.log('update the layer!');
+      
       var el = document.getElementById( layer.id );
       el.innerHTML = '';
-      this.populateLayerItem( el, layer );
+      this.populateLayerItem( el, layer, true );
 
     }
   }
