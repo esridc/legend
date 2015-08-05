@@ -79,9 +79,9 @@
     } else {
       console.log('update the layer!');
       var el = document.getElementById( layer.id );
-      el.html = '';
+      el.innerHTML = '';
       this.populateLayerItem( el, layer );
-      
+
     }
   }
 
