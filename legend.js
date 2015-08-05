@@ -81,6 +81,7 @@
       var el = document.getElementById( layer.id );
       el.html = '';
       this.populateLayerItem( el, layer );
+      
     }
   }
 
