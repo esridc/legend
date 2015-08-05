@@ -70,8 +70,8 @@
     var exists = false;
 
     //make sure we already have the layer 
-    this.layers.forEach(function(layer, i) {
-      if ( layer.id === id ) { exists = true; }
+    this.layers.forEach(function(l, i) {
+      if ( layer.id === l.id ) { exists = true; }
     });
 
     if ( !exists ) { 
