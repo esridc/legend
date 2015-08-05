@@ -28,10 +28,6 @@
       this.layers.forEach(function(layer) {
         self.addLayer(layer, true);
       });
-      this._classRemoveEventListeners('click', 'legend-remove-layer', '_onRemoveLayer' );
-      this._classEventBuilder('click', 'legend-remove-layer', '_onRemoveLayer' );
-      this._classRemoveEventListeners('click', 'legend-edit-layer', '_onLayerEdit' );
-      this._classEventBuilder('click', 'legend-edit-layer', '_onLayerEdit' );
     }
 
   }
@@ -41,10 +37,6 @@
     var container = document.getElementById( this.container );
     var innerContainer = document.createElement( 'div' );
     container.appendChild( innerContainer ).id = 'legend-component';
-
-    //var header = document.createElement( 'div' );
-    //innerContainer.appendChild( header ).id = 'open-search-header';
-    //header.innerHTML = 'Legend';
 
     var content = document.createElement( 'div' );
     innerContainer.appendChild( content ).id = 'legend-component-content';
@@ -87,6 +79,7 @@
 
 
   Legend.prototype.populateLayerItem = function(el, layer, blockEventing) {
+    var self = this;
     //if can remove layer, add option to UI
     var editable = ( this.state.editable ) ? 'block' : 'none';
     
@@ -101,8 +94,8 @@
     editor.style.display = editable;
 
     //create editor elements 
-    this._createElement('div', editor, 'close-'+layer.id, '&#x2715;', 'legend-tool legend-remove-layer');
-    this._createElement('div', editor, 'edit-'+layer.id, '&#x270E;', 'legend-tool legend-edit-layer');
+    var removeEl = this._createElement('div', editor, 'close-'+layer.id, '&#x2715;', 'legend-tool legend-remove-layer');
+    var editEl = this._createElement('div', editor, 'edit-'+layer.id, '&#x270E;', 'legend-tool legend-edit-layer');
 
     //add color ramps IF choropleth 
     console.log('renderer.visualVariables???', layer.renderer.visualVariables);
@@ -115,11 +108,10 @@
 
     if ( !blockEventing ) {
       this.layers.push(layer);
-      this._classRemoveEventListeners('click', 'legend-remove-layer', '_onRemoveLayer' );
-      this._classEventBuilder('click', 'legend-remove-layer', '_onRemoveLayer' );
-      this._classRemoveEventListeners('click', 'legend-edit-layer', '_onLayerEdit' );
-      this._classEventBuilder('click', 'legend-edit-layer', '_onLayerEdit' );
     }
+
+    this._addEventToElement('click', removeEl, '_onRemoveLayer');
+    this._addEventToElement('click', editEl, '_onLayerEdit' );
 
   }
 
@@ -161,7 +153,6 @@
 
 
   Legend.prototype._buildColorRamp = function(el, stops, id) {
-    console.log('stops', stops);
     var self = this;
     var width = 272 / stops.length; 
 
@@ -207,43 +198,10 @@
 
 
 
-
-  /*
-  * Event builder for classes 
-  * @param {String}     eventName, type of event 
-  * @param {String}     className, what element class are we binding to
-  * @param {String}     fnName, what action (function to call) when event fires 
-  *
-  */
-  Legend.prototype._classEventBuilder = function(eventName, className, fnName ) {
-    var self = this; 
-    
-    var linkEl = document.getElementsByClassName( className );
-    for(var i=0;i<linkEl.length;i++){
-      if(linkEl[i].addEventListener){
-        linkEl[i].addEventListener( eventName , function(e) { self[ fnName ].call(self, e) });
-      } else {
-        linkEl[i].attachEvent('on'+eventName, function(e) { self[ fnName ].call(self, e) });
-      }
-    }
-
+  Legend.prototype._addEventToElement = function(eventName, el, fnName) {
+    var self = this;
+    el.addEventListener( eventName , function(e) { self[ fnName ].call(self, e) });
   }
-
-
-
-  Legend.prototype._classRemoveEventListeners = function(eventName, className, fnName ) {
-    var self = this; 
-
-    
-    var linkEl = document.getElementsByClassName( className );
-    for(var i=0;i<linkEl.length;i++){
-      if(linkEl[i].removeEventListener){
-        linkEl[i].removeEventListener( eventName , function(e) { self[ fnName ].call(self, e) });
-      }
-    }
-
-  }
-
 
 
   /*
