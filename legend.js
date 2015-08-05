@@ -30,6 +30,8 @@
       });
       this._classRemoveEventListeners('click', 'legend-remove-layer', '_onRemoveLayer' );
       this._classEventBuilder('click', 'legend-remove-layer', '_onRemoveLayer' );
+      this._classRemoveEventListeners('click', 'legend-edit-layer', '_onLayerEdit' );
+      this._classEventBuilder('click', 'legend-edit-layer', '_onLayerEdit' );
     }
 
   }
@@ -55,43 +57,46 @@
   Legend.prototype.addLayer = function(layer, blockEventing) {
     console.log('add layer: ', layer);
     var el = document.getElementById( 'legend-component-content' );
-    
+    //if can remove layer, add option to UI
+    var editable = ( this.state.editable ) ? 'block' : 'none';
+
     var item = this._createElement('div', el, layer.id, '', 'legend-item');
     this._createElement('div', item, 'title-'+layer.id, layer.name, 'legend-title');
+    
+    var editor = this._createElement('div', item, 'edit-tools-'+layer.id, '', 'legend-edit-tools');
+    editor.style.display = editable;
 
-    //if can remove layer, add option to UI
-    var editable = ( this.state.editable ) ? 'enabled' : 'disabled';
-    this._createElement('div', item, 'close-'+layer.id, '&#x2715;', 'legend-remove-layer '+editable);
+    //create editor elements 
+    this._createElement('div', editor, 'close-'+layer.id, '&#x2715;', 'legend-tool legend-remove-layer');
+    this._createElement('div', editor, 'edit-'+layer.id, '&#x270E;', 'legend-tool legend-edit-layer');
 
     if ( !blockEventing ) {
       this._classRemoveEventListeners('click', 'legend-remove-layer', '_onRemoveLayer' );
       this._classEventBuilder('click', 'legend-remove-layer', '_onRemoveLayer' );
+      this._classRemoveEventListeners('click', 'legend-edit-layer', '_onLayerEdit' );
+      this._classEventBuilder('click', 'legend-edit-layer', '_onLayerEdit' );
     }
   }
 
 
 
-  Legend.prototype.disableRemove = function() {
+  Legend.prototype.disableEdit = function() {
     this.state.editable = false;
-    var editable = ( this.state.editable ) ? 'enabled' : 'disabled';
-    var items = document.getElementsByClassName( 'legend-remove-layer' );
     
+    var items = document.getElementsByClassName( 'legend-edit-tools' );
     for(var i=0;i<items.length;i++){
-      items[i].classList.remove('enabled');
-      items[i].classList.add('disabled');
+      items[i].style.display = 'none';
     }
 
   }
 
 
-  Legend.prototype.enableRemove = function() {
+  Legend.prototype.enableEdit = function() {
     this.state.editable = true;
-    var editable = ( this.state.editable ) ? 'enabled' : 'disabled';
-    var items = document.getElementsByClassName( 'legend-remove-layer' );
-    
+
+    var items = document.getElementsByClassName( 'legend-edit-tools' );
     for(var i=0;i<items.length;i++){
-      items[i].classList.remove('disabled');
-      items[i].classList.add('enabled');
+      items[i].style.display = 'block';
     }
   }
 
@@ -186,7 +191,10 @@
     
     //remove from dom
     var el = document.getElementById(id);
-    el.parentNode.removeChild(el);
+    el.classList.add('removing');
+    setTimeout(function() {
+      el.parentNode.removeChild(el);
+    },400);
 
     //remove from layers list 
     this.layers.forEach(function(layer, i) {
@@ -197,6 +205,21 @@
     this.emit('remove-layer', id);
   }
 
+
+
+  Legend.prototype.editLayer = function(e) {
+    var id = e.target.id.replace(/edit-/, '');
+    console.log('edit id: ', id);
+
+    var items = document.getElementsByClassName( 'legend-item' );
+    for(var i=0;i<items.length;i++){
+      items[i].classList.remove('selected');
+    }
+
+    document.getElementById(id).classList.add('selected');
+
+    this.emit('edit-layer', id);
+  }
 
 
   /************* EVENTS **************/
@@ -220,6 +243,10 @@
 
   Legend.prototype._onRemoveLayer = function(e) {
     this.removeLayer(e);
+  }
+
+  Legend.prototype._onLayerEdit = function(e) {
+    this.editLayer(e);
   }
 
 

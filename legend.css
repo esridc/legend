@@ -3,7 +3,7 @@
   z-index: 1000;
   pointer-events: none;
   background: #FFF;
-  width: 98%;
+  width: 300px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.11);
   border-radius: 4px;
   overflow: hidden;
@@ -29,10 +29,24 @@
   border-bottom: 1px solid #E8E8E8;
   padding: 5px;
   position: relative;
-  width: 92%;
+  width: 100%;
   margin: auto;
-  margin-top: 3px;
-  margin-bottom: 3px;
+  padding-top:10px;
+  padding:bottom:10px;
+  overflow: hidden;
+  -webkit-animation:pop-in 0.5s;
+  -moz-animation:pop-in 0.5s;
+  -ms-animation:pop-in 0.5s;
+}
+
+.legend-item.removing {
+  -webkit-animation:pop-out 0.5s;
+  -moz-animation:pop-out 0.5s;
+  -ms-animation:pop-out 0.5s; 
+}
+
+.legend-item.selected {
+  background:#EEE;
 }
 
 [class~='legend-item']:last-of-type  {
@@ -43,31 +57,42 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width:90%;
+  width:245px;
+  float:left;
+}
+
+.legend-edit-tools {
+  width:45px;
+  float: left;
+  overflow: hidden;
+}
+
+.legend-tool {
+  float:right;
 }
 
 .legend-remove-layer {
-  position: absolute;
-  right: 0px;
-  top: 0px;
   color: #444;
-  background-color: #fff;
   border-radius: 25px;
   width: 20px;
   height: 20px;
   text-align: center;
-  border: 1px solid #EEE;
 }
 
-.legend-remove-layer.disabled {
-  display: none;
-}
-
-.legend-remove-layer.enabled {
-  display: block;
+.legend-edit-layer {
+  color: #999;
+  border-radius: 25px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
 }
 
 .legend-remove-layer:hover {
+  cursor: pointer;
+  color:#000;
+}
+
+.legend-edit-layer:hover {
   cursor: pointer;
   color:#000;
 }
@@ -152,4 +177,17 @@
 @keyframes pop-in {
   0% { opacity: 0; transform: scale(0.5); }
   100% { opacity: 1; transform: scale(1); }
+}
+
+@-webkit-keyframes pop-out {
+  0% { opacity: 1; -webkit-transform: scale(1); }
+  100% { opacity: 0; -webkit-transform: scale(0.3); }
+}
+@-moz-keyframes pop-out {
+  0% { opacity: 1; -moz-transform: scale(1); }
+  100% { opacity: 0; -moz-transform: scale(0.3); }
+}
+@keyframes pop-out {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.3); }
 }
