@@ -134,7 +134,7 @@
   Legend.prototype._buildColorRamp = function(el, stops, id) {
     console.log('stops', stops);
     var self = this;
-    var width = 280 / stops.length; 
+    var width = 272 / stops.length; 
 
     stops.forEach(function(stop) {
       var color = self._dojoColorToRgba(stop.color);
