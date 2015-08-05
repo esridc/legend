@@ -59,9 +59,10 @@
     var el = document.getElementById( 'legend-component-content' );
     //if can remove layer, add option to UI
     var editable = ( this.state.editable ) ? 'block' : 'none';
+    var title = this._formatTitle(layer.name);
 
     var item = this._createElement('div', el, layer.id, '', 'legend-item');
-    this._createElement('div', item, 'title-'+layer.id, layer.name, 'legend-title');
+    this._createElement('div', item, 'title-'+layer.id, title, 'legend-title');
     
     var editor = this._createElement('div', item, 'edit-tools-'+layer.id, '', 'legend-edit-tools');
     editor.style.display = editable;
@@ -98,6 +99,14 @@
     for(var i=0;i<items.length;i++){
       items[i].style.display = 'block';
     }
+  }
+
+
+
+  Legend.prototype._formatTitle = function(title) {
+    title = title.replace(/_/g, ' ');
+
+    return title;
   }
 
 
@@ -209,16 +218,24 @@
 
   Legend.prototype.editLayer = function(e) {
     var id = e.target.id.replace(/edit-/, '');
-    console.log('edit id: ', id);
+    var el = document.getElementById(id);
+    var selected = false; 
+    
+    if ( el.classList.contains('selected') ) {
+      selected = true;
+    }
 
     var items = document.getElementsByClassName( 'legend-item' );
     for(var i=0;i<items.length;i++){
       items[i].classList.remove('selected');
     }
 
-    document.getElementById(id).classList.add('selected');
-
-    this.emit('edit-layer', id);
+    if ( !selected ) {
+      el.classList.add('selected');
+      this.emit('edit-layer', id);
+    } else {
+      this.emit('edit-layer-end', id);
+    }
   }
 
 

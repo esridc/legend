@@ -59,6 +59,7 @@
   text-overflow: ellipsis;
   width:245px;
   float:left;
+  text-transform: capitalize;
 }
 
 .legend-edit-tools {
