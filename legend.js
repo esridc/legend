@@ -72,6 +72,7 @@
     this._createElement('div', editor, 'edit-'+layer.id, '&#x270E;', 'legend-tool legend-edit-layer');
 
     if ( !blockEventing ) {
+      console.log('add me!');
       this.layers.push(layer);
       this._classRemoveEventListeners('click', 'legend-remove-layer', '_onRemoveLayer' );
       this._classEventBuilder('click', 'legend-remove-layer', '_onRemoveLayer' );
