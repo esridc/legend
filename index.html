@@ -16,9 +16,8 @@
       }
       #legend-container {
         width:300px;
-        height:400px;
+        height:auto;
         margin:50px;
-        overflow: hidden;
         position: relative;
       }
     </style>
@@ -39,6 +38,283 @@
       var legend = new Legend('legend-container', {
         editable: true,
         layers: [
+          {
+            'id': '0258',
+            'name': 'Graduated + Themed',
+            'renderer': {
+                "type": "classBreaks",
+                "label": "",
+                "description": "",
+                "symbol": {
+                  "color": [
+                    43,
+                    140,
+                    190,
+                    200
+                  ],
+                  "size": 6,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    "color": [
+                      140,
+                      150,
+                      198,
+                      255
+                    ],
+                    "width": 0.5,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "field": "WIND_SPEED",
+                "minValue": 1,
+                "classBreakInfos": [
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 43,
+                        "g": 140,
+                        "b": 190,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 5.333333333333333,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 140,
+                          "g": 150,
+                          "b": 198,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid"
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0
+                    },
+                    "label": 0,
+                    "classMaxValue": 0,
+                    "minValue": 1,
+                    "maxValue": 0
+                  },
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 43,
+                        "g": 140,
+                        "b": 190,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 13.333333333333332,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 140,
+                          "g": 150,
+                          "b": 198,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid"
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0
+                    },
+                    "label": "> 0 to 8.125",
+                    "classMaxValue": 8.125,
+                    "minValue": 0,
+                    "maxValue": 8.125
+                  },
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 43,
+                        "g": 140,
+                        "b": 190,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 21.333333333333332,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 140,
+                          "g": 150,
+                          "b": 198,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid"
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0
+                    },
+                    "label": "> 8.125 to 16.25",
+                    "classMaxValue": 16.25,
+                    "minValue": 8.125,
+                    "maxValue": 16.25
+                  },
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 43,
+                        "g": 140,
+                        "b": 190,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 29.333333333333332,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 140,
+                          "g": 150,
+                          "b": 198,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid"
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0
+                    },
+                    "label": "> 16.25 to 24.375",
+                    "classMaxValue": 24.375,
+                    "minValue": 16.25,
+                    "maxValue": 24.375
+                  },
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 43,
+                        "g": 140,
+                        "b": 190,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 40,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 140,
+                          "g": 150,
+                          "b": 198,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid"
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0
+                    },
+                    "label": "> 24.375 to 32.5",
+                    "classMaxValue": 32.5,
+                    "minValue": 24.375,
+                    "maxValue": 32.5
+                  }
+                ],
+                "layerId": null,
+                "visualVariables": [
+                  {
+                    "type": "colorInfo",
+                    "field": "WIND_SPEED",
+                    "stops": [
+                      {
+                        "value": 0,
+                        "color": {
+                          "r": 247,
+                          "g": 252,
+                          "b": 253,
+                          "a": 0.7843137254901961
+                        },
+                        "label": null
+                      },
+                      {
+                        "value": 8.125,
+                        "color": {
+                          "r": 224,
+                          "g": 236,
+                          "b": 244,
+                          "a": 0.7843137254901961
+                        },
+                        "label": null
+                      },
+                      {
+                        "value": 16.25,
+                        "color": {
+                          "r": 191,
+                          "g": 211,
+                          "b": 230,
+                          "a": 0.7843137254901961
+                        },
+                        "label": null
+                      },
+                      {
+                        "value": 24.375,
+                        "color": {
+                          "r": 158,
+                          "g": 188,
+                          "b": 218,
+                          "a": 0.7843137254901961
+                        },
+                        "label": null
+                      },
+                      {
+                        "value": 32.5,
+                        "color": {
+                          "r": 140,
+                          "g": 150,
+                          "b": 198,
+                          "a": 0.7843137254901961
+                        },
+                        "label": null
+                      },
+                      {
+                        "value": 40.625,
+                        "color": {
+                          "r": 140,
+                          "g": 107,
+                          "b": 177,
+                          "a": 0.7843137254901961
+                        },
+                        "label": null
+                      },
+                      {
+                        "value": 48.75,
+                        "color": {
+                          "r": 136,
+                          "g": 65,
+                          "b": 157,
+                          "a": 0.7843137254901961
+                        },
+                        "label": null
+                      },
+                      {
+                        "value": 56.875,
+                        "color": {
+                          "r": 110,
+                          "g": 1,
+                          "b": 107,
+                          "a": 0.7843137254901961
+                        },
+                        "label": null
+                      }
+                    ]
+                  }
+                ]
+              }
+          },
           {
             'id': '123',
             'name': 'The first layer has a very long title ok?! No, I mean long...',
@@ -84,6 +360,226 @@
                 "field": null,
                 "minValue": 1,
                 "classBreakInfos": null,
+                "layerId": "01b3192216804cf3a262b8aafe93ef4d_0"
+              }
+          },
+          {
+            'id': '101112',
+            'name': 'graduate layer but not choropleth',
+            'renderer': {
+                "visualVariables": null,
+                "type": "classBreaks",
+                "label": "",
+                "description": "",
+                "symbol": {
+                  "color": [
+                    78,
+                    179,
+                    211,
+                    200
+                  ],
+                  "size": 6,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    "color": [
+                      82,
+                      82,
+                      82,
+                      255
+                    ],
+                    "width": 0.5,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "field": "ELEVATION",
+                "minValue": 1,
+                "classBreakInfos": [
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 78,
+                        "g": 179,
+                        "b": 211,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 5.333333333333333,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 82,
+                          "g": 82,
+                          "b": 82,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid",
+                        "_inherited": {
+                          "p": 2
+                        }
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0,
+                      "_inherited": {
+                        "p": 2
+                      }
+                    },
+                    "label": -35,
+                    "classMaxValue": -35,
+                    "minValue": 1,
+                    "maxValue": -35
+                  },
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 78,
+                        "g": 179,
+                        "b": 211,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 13.333333333333332,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 82,
+                          "g": 82,
+                          "b": 82,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid",
+                        "_inherited": {
+                          "p": 2
+                        }
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0,
+                      "_inherited": {
+                        "p": 2
+                      }
+                    },
+                    "label": "> -35 to 471.125",
+                    "classMaxValue": 471.125,
+                    "minValue": -35,
+                    "maxValue": 471.125
+                  },
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 78,
+                        "g": 179,
+                        "b": 211,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 21.333333333333332,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 82,
+                          "g": 82,
+                          "b": 82,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid",
+                        "_inherited": {
+                          "p": 2
+                        }
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0,
+                      "_inherited": {
+                        "p": 2
+                      }
+                    },
+                    "label": "> 471.125 to 977.25",
+                    "classMaxValue": 977.25,
+                    "minValue": 471.125,
+                    "maxValue": 977.25
+                  },
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 78,
+                        "g": 179,
+                        "b": 211,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 29.333333333333332,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 82,
+                          "g": 82,
+                          "b": 82,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid",
+                        "_inherited": {
+                          "p": 2
+                        }
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0,
+                      "_inherited": {
+                        "p": 2
+                      }
+                    },
+                    "label": "> 977.25 to 1483.375",
+                    "classMaxValue": 1483.375,
+                    "minValue": 977.25,
+                    "maxValue": 1483.375
+                  },
+                  {
+                    "symbol": {
+                      "color": {
+                        "r": 78,
+                        "g": 179,
+                        "b": 211,
+                        "a": 0.7843137254901961
+                      },
+                      "size": 40,
+                      "type": "simplemarkersymbol",
+                      "style": "circle",
+                      "outline": {
+                        "color": {
+                          "r": 82,
+                          "g": 82,
+                          "b": 82,
+                          "a": 1
+                        },
+                        "width": 0.6666666666666666,
+                        "type": "simplelinesymbol",
+                        "style": "solid",
+                        "_inherited": {
+                          "p": 2
+                        }
+                      },
+                      "xoffset": 0,
+                      "yoffset": 0,
+                      "_inherited": {
+                        "p": 2
+                      }
+                    },
+                    "label": "> 1483.375 to 1989.5",
+                    "classMaxValue": 1989.5,
+                    "minValue": 1483.375,
+                    "maxValue": 1989.5
+                  }
+                ],
                 "layerId": "01b3192216804cf3a262b8aafe93ef4d_0"
               }
           }

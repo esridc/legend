@@ -100,21 +100,28 @@
     //add color ramps IF choropleth 
     console.log('renderer.visualVariables???', layer.renderer);
     if ( layer.renderer.visualVariables && !layer.renderer.classBreakInfos ) {
+      
       //simple color ramp
       var renderer = layer.renderer.visualVariables[0];
       var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
       var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+renderer.field, 'legend-field');
       this._buildColorRamp(keyContainer, renderer.stops, layer.id);
-    } else if ( layer.renderer.visualVariables && layer.renderer.classBreakInfos ) {
-      //TODO color ramp + circles 
-      console.log('graduated and choropleth');
-    } else if ( !layer.renderer.visualVariables && layer.renderer.classBreakInfos ) {
+
+    } else if ( layer.renderer.classBreakInfos ) {
+      
       //TODO just graduated 
-      console.log('just graduated simble');
+      console.log('just graduated simble', layer.renderer);
+      var renderer = layer.renderer.classBreakInfos;
+      var colors = ( layer.renderer.visualVariables ) ? layer.renderer.visualVariables : null;
+      var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
+      var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+layer.renderer.field, 'legend-field');
+      this._buildGraduatedRamp(keyContainer, renderer, layer.id, colors);
+
     } else if ( !layer.renderer.visualVariables && !layer.renderer.classBreakInfos ) {
-      //TODO simple symbol 
-      console.log('not graduated OR choropleth');
+      
+      //simple symbols!
       this._buildSimpleSymbol(titleEl, layer.renderer, layer.id);
+
     }
 
     if ( !blockEventing ) {
@@ -166,7 +173,7 @@
 
 
   Legend.prototype._buildSimpleSymbol = function(el, renderer, id) {
-    console.log('el', el);
+    
     el.classList.add('single-color');
     var color = this._dojoColorToRgba(renderer.symbol.color);
     var stroke = this._dojoColorToRgba(renderer.symbol.outline.color);
@@ -178,6 +185,63 @@
     if ( renderer.symbol.style === 'esriSMSCircle') {
       symbol.classList.add('circle');
     }
+  }
+
+
+
+
+  Legend.prototype._buildGraduatedRamp = function(el, stops, id, colors) {
+    console.log('renderer', stops, 'colors', colors);
+    var self = this;
+
+    if ( colors ) {
+      colors = colors[0].stops;
+    }
+    
+    console.log('COLORS::', colors );
+
+    var color; 
+    stops.forEach(function(stop, i) {
+      var width = 272 / stops.length; 
+      var height = width; 
+
+      if ( colors ) {
+        color = 'rgb('+colors[i].color.r+','+colors[i].color.g+','+colors[i].color.b+')'; 
+      } else {
+        var c = stop.symbol.color;
+        color = 'rgb('+c.r+','+c.g+','+c.b+')'; 
+      }
+      var stroke = stop.symbol.outline.color;
+      stroke = 'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
+
+      var item = document.createElement('div');
+      el.appendChild( item ).className = 'legend-graduated-symbol-container';
+      item.style.width = width + 'px';
+
+      var circle = document.createElement('div');
+      item.appendChild(circle).className = 'legend-graduated-symbol';
+      circle.style.background = color;
+      circle.style.border = '1px solid '+stroke;
+        
+      var max = width; 
+      
+      width = width / ( stops.length / (i + 1 )); 
+      circle.style.width = width + 'px';
+      circle.style.height = width + 'px';
+      
+      var margin = (max - width) / 2;
+      circle.style['margin-top'] = margin + 'px';
+    });
+
+    var min = stops[0].minValue.toFixed(2);
+    var max = stops[stops.length - 1].maxValue.toFixed(2);
+    min = parseFloat(min).toLocaleString();
+    max = parseFloat(max).toLocaleString();
+
+    var values = this._createElement('div', el, 'values-'+id, '', 'legend-key');
+    this._createElement('div', values, 'min-'+id, min, 'legend-min-value');
+    this._createElement('div', values, 'max-'+id, max, 'legend-max-value legend-max-graduated');
+
   }
 
 
