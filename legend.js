@@ -202,13 +202,12 @@
       var height = width; 
 
       if ( colors ) {
-        color = 'rgb('+colors[i].color.r+','+colors[i].color.g+','+colors[i].color.b+')'; 
+        color = self._dojoColorToRgba(colors[i]); 
       } else {
-        var c = stop.symbol.color;
-        color = 'rgb('+c.r+','+c.g+','+c.b+')'; 
+        color = self._dojoColorToRgba(stop.symbol.color); 
       }
       console.log('COLOR::::', color);
-      
+
       stroke = stop.symbol.outline.color;
       stroke = 'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
 
