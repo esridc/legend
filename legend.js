@@ -200,7 +200,7 @@
     
     console.log('COLORS::', colors );
 
-    var color; 
+    var color, stroke;
     stops.forEach(function(stop, i) {
       var width = 272 / stops.length; 
       var height = width; 
@@ -211,7 +211,8 @@
         var c = stop.symbol.color;
         color = 'rgb('+c.r+','+c.g+','+c.b+')'; 
       }
-      var stroke = stop.symbol.outline.color;
+      
+      stroke = stop.symbol.outline.color;
       stroke = 'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
 
       var item = document.createElement('div');
@@ -233,10 +234,8 @@
       circle.style['margin-top'] = margin + 'px';
     });
 
-    var min = stops[0].minValue.toFixed(2);
-    var max = stops[stops.length - 1].maxValue.toFixed(2);
-    min = parseFloat(min).toLocaleString();
-    max = parseFloat(max).toLocaleString();
+    var min = stops[0].label;
+    var max = stops[stops.length - 1].label;
 
     var values = this._createElement('div', el, 'values-'+id, '', 'legend-key');
     this._createElement('div', values, 'min-'+id, min, 'legend-min-value');
