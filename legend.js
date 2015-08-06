@@ -206,10 +206,9 @@
       } else {
         color = self._dojoColorToRgba(stop.symbol.color); 
       }
-      console.log('color', color);
-
+      
       stroke = stop.symbol.outline.color;
-      stroke = this._dojoColorToRgba(stroke); //'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
+      stroke = self._dojoColorToRgba(stroke); //'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
 
       var item = document.createElement('div');
       el.appendChild( item ).className = 'legend-graduated-symbol-container';
