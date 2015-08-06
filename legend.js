@@ -98,7 +98,6 @@
     var editEl = this._createElement('div', editor, 'edit-'+layer.id, '&#x270E;', 'legend-tool legend-edit-layer');
 
     //add color ramps IF choropleth 
-    console.log('renderer.visualVariables???', layer.renderer);
     if ( layer.renderer.visualVariables && !layer.renderer.classBreakInfos ) {
       
       //simple color ramp
@@ -110,7 +109,6 @@
     } else if ( layer.renderer.classBreakInfos ) {
       
       //TODO just graduated 
-      console.log('just graduated simble', layer.renderer);
       var renderer = layer.renderer.classBreakInfos;
       var colors = ( layer.renderer.visualVariables ) ? layer.renderer.visualVariables : null;
       var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
@@ -191,14 +189,12 @@
 
 
   Legend.prototype._buildGraduatedRamp = function(el, stops, id, colors) {
-    console.log('renderer', stops, 'colors', colors);
+    console.log('BUILD GRADUATED renderer', stops, 'colors', colors);
     var self = this;
 
     if ( colors ) {
       colors = colors[0].stops;
     }
-    
-    console.log('COLORS::', colors );
 
     var color, stroke;
     stops.forEach(function(stop, i) {
@@ -211,6 +207,7 @@
         var c = stop.symbol.color;
         color = 'rgb('+c.r+','+c.g+','+c.b+')'; 
       }
+      console.log('COLOR::::', color);
       
       stroke = stop.symbol.outline.color;
       stroke = 'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
@@ -327,7 +324,6 @@
     var self = this;
 
     var id = e.target.id.replace(/close-/, '');
-    console.log('remove id', id);
     
     //remove from dom
     var el = document.getElementById(id);
