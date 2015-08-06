@@ -87,7 +87,7 @@
     var top = this._createElement('div', el, 'top-'+layer.id, '', 'legend-top-row');
 
     //title
-    this._createElement('div', top, 'title-'+layer.id, title, 'legend-title');
+    var titleEl = this._createElement('div', top, 'title-'+layer.id, '<div class="legend-title-text">'+title+'</div>', 'legend-title');
   
     //add editor     
     var editor = this._createElement('div', top, 'edit-tools-'+layer.id, '', 'legend-edit-tools');
@@ -98,12 +98,23 @@
     var editEl = this._createElement('div', editor, 'edit-'+layer.id, '&#x270E;', 'legend-tool legend-edit-layer');
 
     //add color ramps IF choropleth 
-    console.log('renderer.visualVariables???', layer.renderer.visualVariables);
-    if ( layer.renderer.visualVariables ) {
+    console.log('renderer.visualVariables???', layer.renderer);
+    if ( layer.renderer.visualVariables && !layer.renderer.classBreakInfos ) {
+      //simple color ramp
       var renderer = layer.renderer.visualVariables[0];
       var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
       var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+renderer.field, 'legend-field');
       this._buildColorRamp(keyContainer, renderer.stops, layer.id);
+    } else if ( layer.renderer.visualVariables && layer.renderer.classBreakInfos ) {
+      //TODO color ramp + circles 
+      console.log('graduated and choropleth');
+    } else if ( !layer.renderer.visualVariables && layer.renderer.classBreakInfos ) {
+      //TODO just graduated 
+      console.log('just graduated simble');
+    } else if ( !layer.renderer.visualVariables && !layer.renderer.classBreakInfos ) {
+      //TODO simple symbol 
+      console.log('not graduated OR choropleth');
+      this._buildSimpleSymbol(titleEl, layer.renderer, layer.id);
     }
 
     if ( !blockEventing ) {
@@ -152,6 +163,26 @@
   }
 
 
+
+
+  Legend.prototype._buildSimpleSymbol = function(el, renderer, id) {
+    console.log('el', el);
+    el.classList.add('single-color');
+    var color = this._dojoColorToRgba(renderer.symbol.color);
+    var stroke = this._dojoColorToRgba(renderer.symbol.outline.color);
+    var symbol = this._createElement('div', el, 'symbol-'+id, '', 'legend-simple-symbol', true);
+    symbol.style.background = color; 
+    symbol.style.border = '1px solid '+stroke;
+
+    //circle or square? 
+    if ( renderer.symbol.style === 'esriSMSCircle') {
+      symbol.classList.add('circle');
+    }
+  }
+
+
+
+
   Legend.prototype._buildColorRamp = function(el, stops, id) {
     var self = this;
     var width = 272 / stops.length; 
@@ -186,10 +217,14 @@
   * @param {String}   any text one wishes to append to new element 
   * @param {String}   optional classname for new element 
   */
-  Legend.prototype._createElement = function(type, parent, id, html, className ) {
+  Legend.prototype._createElement = function(type, parent, id, html, className, prepend ) {
 
     var el = document.createElement( type ); 
-    parent.appendChild( el ).id = id;
+    if ( prepend ) {
+      parent.insertBefore( el, parent.firstChild ).id = id;
+    } else {
+      parent.appendChild( el ).id = id;
+    }
     el.innerHTML = html;
     document.getElementById( id ).className = className;
 

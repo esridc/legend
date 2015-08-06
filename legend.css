@@ -58,13 +58,21 @@
 }
 
 .legend-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width:230px;
   float:left;
   text-transform: capitalize;
 }
+
+.legend-title-text {
+  float:left;
+  white-space: nowrap;
+  overflow: hidden;
+  width:230px;
+  text-overflow: ellipsis;
+}
+
+.legend-title.single-color .legend-title-text {
+  width:208px;
+} 
 
 .legend-edit-tools {
   width:45px;
@@ -133,6 +141,17 @@
 .legend-field {
   font-size: 11px;
   margin-top: 3px; 
+}
+
+.legend-simple-symbol {
+  width:15px;
+  height:15px;
+  float: left;
+  margin-right: 5px;
+}
+
+.legend-simple-symbol.circle {
+  border-radius: 50px;
 }
 
 /* Don't show shadows when selecting text */
