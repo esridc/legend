@@ -202,11 +202,11 @@
       var height = width; 
 
       if ( colors ) {
-        color = self._dojoColorToRgba(colors[i]); 
+        color = self._dojoColorToRgba(colors[i].color); 
       } else {
         color = self._dojoColorToRgba(stop.symbol.color); 
       }
-      console.log('COLOR::::', color);
+      console.log('color', color);
 
       stroke = stop.symbol.outline.color;
       stroke = 'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
