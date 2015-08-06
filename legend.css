@@ -7,6 +7,7 @@
   box-shadow: 0 1px 5px rgba(0,0,0,0.11);
   border-radius: 4px;
   overflow: hidden;
+  font-size:15px;
   font-family: 'Open Sans', sans-serif;
   background: #FFF;
 }
@@ -29,7 +30,8 @@
   border-bottom: 1px solid #E8E8E8;
   padding: 5px;
   position: relative;
-  width: 290px;
+  width: 300px;
+  line-height: 15px;
   margin: auto;
   padding-top:15px;
   padding:bottom:15px;
@@ -53,6 +55,10 @@
   border-bottom: none;
 }
 
+[class~='legend-graduated-symbol']:first-of-type  {
+  margin-left:10px;
+}
+
 .legend-top-row {
   overflow: hidden;
 }
@@ -68,6 +74,7 @@
   overflow: hidden;
   width:245px;
   text-overflow: ellipsis;
+  height: 18px;
 }
 
 .legend-title.single-color .legend-title-text {
@@ -114,6 +121,7 @@
   width:100%;
   height:auto;
   overflow: hidden;
+  width: 290px;
 }
 
 .legend-color-swatch {
