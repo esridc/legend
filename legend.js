@@ -209,7 +209,7 @@
       console.log('color', color);
 
       stroke = stop.symbol.outline.color;
-      stroke = 'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
+      stroke = this._createElement(stroke); //'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
 
       var item = document.createElement('div');
       el.appendChild( item ).className = 'legend-graduated-symbol-container';
