@@ -28,7 +28,6 @@
 
 .legend-item {
   border-bottom: 1px solid #E8E8E8;
-  padding: 5px;
   position: relative;
   width: 300px;
   line-height: 15px;
@@ -40,6 +39,14 @@
   -webkit-animation:pop-in 0.5s;
   -moz-animation:pop-in 0.5s;
   -ms-animation:pop-in 0.5s;
+}
+
+.legend-item.sortable {
+  cursor: pointer;
+}
+.legend-item.sortable:hover {
+  background:#f9f9f9;
+  border-bottom:1px dashed #CCC;
 }
 
 .legend-item.removing {

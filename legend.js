@@ -119,6 +119,7 @@
     } else if ( !layer.renderer.visualVariables && !layer.renderer.classBreakInfos ) {
       
       //simple symbols!
+      el.style['padding-top'] = '0px';
       this._buildSimpleSymbol(titleEl, layer.renderer, layer.id);
 
     }
@@ -323,13 +324,16 @@
   Legend.prototype._sortIt = function() {
     var self = this;
 
-    console.log('sortable!', Sortable);
     if ( Sortable ) {
       var list = document.getElementById("legend-component-content");
+      var items = document.getElementsByClassName( 'legend-item' );
+      for (var i=0; i< items.length; i++ ) {
+        items[i].classList.add('sortable');
+      }
+      
       Sortable.create(list, {
         onUpdate: function (evt/**Event*/){
            var item = evt.item.id; // the current dragged HTMLElement
-            var items = document.getElementsByClassName( 'legend-item' );
             for (var i=0; i< items.length; i++ ) {
               var id = items[i].id;
               self.emit('reorder-layers', {id: id, index: i});
