@@ -30,6 +30,7 @@
       });
     }
 
+    this._sortIt();
   }
 
   Legend.prototype._buildUI = function() {
@@ -38,7 +39,7 @@
     var innerContainer = document.createElement( 'div' );
     container.appendChild( innerContainer ).id = 'legend-component';
 
-    var content = document.createElement( 'div' );
+    var content = document.createElement( 'ul' );
     innerContainer.appendChild( content ).id = 'legend-component-content';
 
   }
@@ -49,7 +50,7 @@
   Legend.prototype.addLayer = function(layer, blockEventing) {
     console.log('add layer: ', layer);
     var el = document.getElementById( 'legend-component-content' );
-    var item = this._createElement('div', el, layer.id, '', 'legend-item');
+    var item = this._createElement('li', el, layer.id, '', 'legend-item');
 
     this.populateLayerItem(item, layer, blockEventing);
   }
@@ -314,6 +315,28 @@
       linkEl.attachEvent('on'+eventName, function(e) { self[ fnName ].call(self, e) });
     }
 
+  }
+
+
+
+
+  Legend.prototype._sortIt = function() {
+    var self = this;
+
+    console.log('sortable!', Sortable);
+    if ( Sortable ) {
+      var list = document.getElementById("legend-component-content");
+      Sortable.create(list, {
+        onUpdate: function (evt/**Event*/){
+           var item = evt.item.id; // the current dragged HTMLElement
+            var items = document.getElementsByClassName( 'legend-item' );
+            for (var i=0; i< items.length; i++ ) {
+              var id = items[i].id;
+              self.emit('reorder-layers', {id: id, index: i});
+            }
+        }
+      }); // That's all.
+    }
   }
 
 
