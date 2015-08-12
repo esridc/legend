@@ -53,6 +53,13 @@
     var item = this._createElement('li', el, layer.id, '', 'legend-item');
 
     this.populateLayerItem(item, layer, blockEventing);
+
+    if ( Sortable ) {
+      var items = document.getElementsByClassName( 'legend-item' );
+      for (var i=0; i< items.length; i++ ) {
+        items[i].classList.add('sortable');
+      }
+    }
   }
 
 
