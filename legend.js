@@ -343,7 +343,9 @@
            var item = evt.item.id; // the current dragged HTMLElement
             for (var i=0; i< items.length; i++ ) {
               var id = items[i].id;
-              self.emit('reorder-layers', {id: id, index: i});
+              var index = ( (items.length - 1) - i );
+              console.log('index', i, index);
+              self.emit('reorder-layers', {id: id, index: index});
             }
         }
       }); // That's all.
