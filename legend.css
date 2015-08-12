@@ -60,7 +60,7 @@
 }
 
 [class~='legend-item']:last-of-type  {
-  border-bottom: none;
+  border-bottom: 1px solid #FFF;
 }
 
 [class~='legend-graduated-symbol']:first-of-type  {
