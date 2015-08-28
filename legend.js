@@ -126,7 +126,7 @@
     } else if ( !layer.renderer.visualVariables && !layer.renderer.classBreakInfos ) {
       
       //simple symbols!
-      //el.style['padding-top'] = '0px';
+      el.style['padding-top'] = '0px';
       this._buildSimpleSymbol(titleEl, layer.renderer, layer.id);
 
     }
