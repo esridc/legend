@@ -50,7 +50,7 @@
   Legend.prototype.addLayer = function(layer, blockEventing) {
     console.log('add layer: ', layer);
     var el = document.getElementById( 'legend-component-content' );
-    var item = this._createElement('li', el, layer.id, '', 'legend-item');
+    var item = this._createElement('li', el, layer.id, '', 'legend-item', true);
 
     this.populateLayerItem(item, layer, blockEventing);
 
@@ -344,7 +344,7 @@
             for (var i=0; i< items.length; i++ ) {
               var id = items[i].id;
               var index = ( (items.length - 1) - i );
-              console.log('index', i, index);
+              //console.log('index', i, index);
               self.emit('reorder-layers', {id: id, index: index});
             }
         }
