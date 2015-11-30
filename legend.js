@@ -112,7 +112,7 @@
       var renderer = layer.renderer.visualVariables[0];
       var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
       var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+renderer.field, 'legend-field');
-      this._buildColorRamp(keyContainer, renderer.stops, layer.id, renderer);
+      this._buildColorRamp(keyContainer, renderer.stops, layer.id, layer.renderer);
 
     } else if ( layer.renderer.classBreakInfos ) {
       
