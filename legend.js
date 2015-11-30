@@ -112,7 +112,7 @@
       var renderer = layer.renderer.visualVariables[0];
       var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
       var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+renderer.field, 'legend-field');
-      this._buildColorRamp(keyContainer, renderer.stops, layer.id, layer.renderer);
+      this._buildColorRamp(keyContainer, renderer.stops, layer.id);
 
     } else if ( layer.renderer.classBreakInfos ) {
       
@@ -258,10 +258,9 @@
 
 
 
-  Legend.prototype._buildColorRamp = function(el, stops, id, renderer) {
+  Legend.prototype._buildColorRamp = function(el, stops, id) {
     var self = this;
     var width = 272 / stops.length; 
-    console.log('stops', stops, 'id', id, renderer);
 
     stops.forEach(function(stop) {
       var color = self._dojoColorToRgba(stop.color);
@@ -274,8 +273,8 @@
 
     var min = stops[0].value.toFixed(2);
     var max = stops[stops.length - 1].value.toFixed(2);
-    min = parseFloat(min).toLocaleString();
-    max = parseFloat(max).toLocaleString();
+    min = parseFloat(min);
+    max = parseFloat(max);
 
     var values = this._createElement('div', el, 'values-'+id, '', 'legend-key');
     this._createElement('div', values, 'min-'+id, min, 'legend-min-value');
