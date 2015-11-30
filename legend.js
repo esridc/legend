@@ -112,7 +112,7 @@
       var renderer = layer.renderer.visualVariables[0];
       var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
       var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+renderer.field, 'legend-field');
-      this._buildColorRamp(keyContainer, renderer.stops, layer.id);
+      this._buildColorRamp(keyContainer, renderer.stops, layer.id, renderer);
 
     } else if ( layer.renderer.classBreakInfos ) {
       
@@ -258,9 +258,10 @@
 
 
 
-  Legend.prototype._buildColorRamp = function(el, stops, id) {
+  Legend.prototype._buildColorRamp = function(el, stops, id, renderer) {
     var self = this;
     var width = 272 / stops.length; 
+    console.log('stops', stops, 'id', id, renderer);
 
     stops.forEach(function(stop) {
       var color = self._dojoColorToRgba(stop.color);
