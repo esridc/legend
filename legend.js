@@ -122,7 +122,8 @@
       var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
       var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+layer.renderer.field, 'legend-field');
       this._buildGraduatedRamp(keyContainer, renderer, layer.id, colors);
-
+      el.style['padding-top'] = '10px';
+      
     } else if ( !layer.renderer.visualVariables && !layer.renderer.classBreakInfos ) {
       
       //simple symbols!
@@ -183,7 +184,7 @@
     
     el.classList.add('single-color');
     var color = this._dojoColorToRgba(renderer.symbol.color);
-    var stroke = this._dojoColorToRgba(renderer.symbol.outline.color);
+    var stroke = (renderer.symbol.outline) ? this._dojoColorToRgba(renderer.symbol.outline.color) : '#FFF';
     var symbol = this._createElement('div', el, 'symbol-'+id, '', 'legend-simple-symbol', true);
     symbol.style.background = color; 
     symbol.style.border = '1px solid '+stroke;
@@ -213,11 +214,18 @@
       if ( colors ) {
         color = self._dojoColorToRgba(colors[i].color); 
       } else {
-        color = self._dojoColorToRgba(stop.symbol.color); 
+        if ( Array.isArray(stop.symbol.color) ) {
+          color = self._dojoColorToRgba(stop.symbol.color); 
+        } else {
+          color = stop.symbol.color;
+        }
       }
       
       stroke = stop.symbol.outline.color;
-      stroke = self._dojoColorToRgba(stroke); //'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
+      if ( Array.isArray(stroke) ) {
+        stroke = self._dojoColorToRgba(stroke);
+      }
+      //'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
 
       var item = document.createElement('div');
       el.appendChild( item ).className = 'legend-graduated-symbol-container';
